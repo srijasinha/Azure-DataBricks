@@ -1,0 +1,128 @@
+Azure data Bricks:
+
+1)It handle unstructed data(big data) - it can be csv , image, txt.
+2)Technology able to process that big data and generate some meaningful data - Called Transforming data.
+3)EX- Apache spark opensource ->process big data
+4)Azure implemented Apache spark ->caleed Azure Data Bricks.
+
+Data from diffrent resource-<Kafka,Blob DataLake(storage location)-<Databricks(Transform Data and process data)-<PLace it in SQl db, cosmos db.
+
+Apache spark Ecosystem :-
+
+1)Spark sql +Dataframes- It work with structured data.Dataframe is like - Relational Db( data in tables and columns)
+
+2)Streaming - To process data and transform real data.
+
+3)MiLib (Machine learning)
+
+4)GraphX Graph Computation
+
+5)Spark Core Api - R,sQL,Python,Scala, Java
+
+Workspace Assets:- 
+
+1)Notebook:- Notebook is like script , written and stored in python, R, mysql or scale.It need a clustur to compute engines to run script.(Notebook)
+
+2)Workspace:- It is environment which contains azure asset like Notebook,clustur,Data
+
+3)Clustur - It is set of computation, resource on which we run Etl Pipelines.IT is logic engine so that notebook script can run .
+
+4)Jobs- It is automated notebook , which is based on a schedule time to run on it.
+
+5)Library - Locally build code available to notebook and jobs running on cluster.
+
+6)Data - To import the data file, it can be any format.
+
+7)Experiments - Where we can run Machine Learning models training.
+
+Working with Folders in workspace:
+
+1) Workspace - shared folder(public folder for team) and user folder(private folder). It has workspace Id.
+
+2)clustur - computation resource
+
+3)Notebook - scrpit( attach clustur to notebook to see result)
+
+4)Databricks Fs(file system) - Has its own folder, files.
+
+DBFS - Data Bricks File System is a distributed file system attactched in Azure Databricks workspace and available on Azure Databricks cluster.
+
+commands - 
+
+1)dbfsutils- It is library to acess data from data bricks file system(DBFS).It is available in Python, R, scala notebooks.
+
+a)dbutils.help()- It will list all the utilities inside in DataBricks.
+
+b)dbutils.data.help(sumarize) - It has sumarize function -It will take data frame and visualize the staticts and give insights.
+
+2) To create dataframe(Tabular representation of data)-
+data=[(1,'Anu'),(2,'sita')]
+cols = ['id','name']
+df =spark.createDataFrame(data,cols)
+display(df)
+
+dbutils.data.sumerize(df) - This will give info of mean,max,count, avg etc value.
+
+3)dbutils.fs.help('cp') - this will copy the data bricks file acrosss the system.
+
+4)head - reading the data from content.
+
+5)ls - list the foler and files inside the particular folder.
+
+6)mkdirs - To creake a directory
+
+7)mv - Move the file in Databricks file system
+
+8)put - It will add content to file 
+
+9)rm- remove the file
+
+10)db.utils.notebook.help()- has Exit() and run() command. 
+
+1)Exit ()- will exit the notebook with the value
+2)Run()- we can execute notebook1 from notebook2.
+
+* widgets Utility-
+This is used to parameterized notebook.To make the notebook dynamic.
+
+dbutils.widgets.help()
+
+1)combobox
+2)dropdown
+3)multiselect
+4)Text
+5)get
+6)Remove
+7)Remove All()
+
+*How to pass values using Run command using utilities.widgets-
+
+dbutils.widgets.run('path1',120,{paramcombobox:combobox})
+
+*create widgets in sql to parameterized notebook in Azure Databricks-
+
+CREATE WEIGHT TEXT firstname DEFAULT 'Sinha'
+
+* Create Mount Point 
+ Attaching your external storage system(local storage) with Databricks system.
+
+*To delete unmount - use unmount command.
+
+Mount Point - Display information about what is currently mounted within DBFS.
+
+Refress Mounts command - Forces all machines in the cluster to refresh their mount cache.
+
+Update Mount - update an existing mount point instead of creating a new one.Returns an error if the mount point is not present.
+
+Secreets Managment -A secreet scope is collection of series identified by name.wORKSPACE HAS LIMIT TO 100 Secret scopes.
+
+Two type of secret scopes -
+1)Azure key vault-backed scopes- To reference secrets structured in an Azure key vault,you can create a secreet scope backed by Azure Key vault.
+
+2)Databricks -backed scopes-It is stored in encrypted database owned and managed by Azure Databricks.
+
+			Scope -< secreet-< value
+
+* Databricks CLI - Databricks command line Interface(CLI) provides an easy to use interface to interact with Azure Databricks Platform.It is python package.
+
+* service Principle Id is (App registration option on azure portal)- Client Id or App Id 
