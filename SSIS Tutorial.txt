@@ -1,0 +1,148 @@
+SSIS (Sql server INtegration Service)-
+
+1)its a ETL tool to Extract,load, Transform
+2)used mostly in Datawarehousing projects
+3)Used for Data Migration projects
+4)Database maintaince activies
+
+Architecture of SSIS - 
+
+1)Data sources - Files,Excl,cloud Apps,Databases
+
+2)Data Preparation - (copy the Data souces) data to  Database called (stageing) - Datawarehouse(build fact and Dimension table)
+
+3)SAAS - SaaS stands for Software as a Service, and it's a cloud computing model that allows users to access software applications and services over the internet through a subscription. 
+- In this Data is in Tabular form or Multidimensional 
+
+4)Power Bi Desktop - Data is moved in power Bi desktop
+
+5)Power Bi Report server - Report is created then published on Report server.
+
+1)SIS(sql server Integration Service)- It comes under Business Inteligence
+2)SSAS(sql  server Anyalysis Service)
+3)SSRS(sql server Reporting service)- Data tools
+
+***SSIS Herarchy***-
+
+solution <Project connection managers <Packages< Micilanious
+
+*To debug use - Data Viewer
+
+*SSIS Architecture-
+
+1)Control Flow - It controls the flow of execution. It has only task.
+Ex -         load employee data
+             sucess|    |  Faliure
+				   |    |
+call Batch execution	 Load log error  
+				   
+
+2)Data Flow -ETL process can be done here. It has souce, Transformation, Destination. It read data row by row.
+
+Demo - control Flow Practical - Loading a file from local to Database(SSIS).
+ 1)Data Flow- Drag and drop Data Flow task in  control flow.(name - Load csv file in DB)
+ 2)Connection string - careate a connection string.
+    a)Source - Give path
+	b)Destination - Give Path
+3)Go inside Data flow Task - Perform ETL.
+     Flat file sources - Read from source
+	 OLEDB Connection - Load data in DB (destination) - Do mapping of table
+4)Execte Task or run Packages - in control flow - step 1
+
+**Transformation**-
+
+1) load data(local server) to database (use ssis) - demo as above
+2) Data conversion-  
+		a)Data Transform Task- Souce column name aand destination column name and type should be matched correctly.
+                               To change data type in Table use Data Transformation task.
+							   
+		b)Derived column Task- To add a new column we use this task.(Ex - Extract only 3 leters from a location column)
+        
+		c)Copy column - It will create a copy of column in table.
+		
+		d)Character Map - To conver a column data in Upperccase or lower case.
+		
+		e) sort - It can be Ascending or decending order column.
+		
+		f)Multicast -create multiple copies of input data and load in Destination.
+		
+		g)Conditional split - Write condition in  SQL Query.
+		
+		h)Union - Combining a data set from all data set and give a single result.
+		
+		i)Union all - It will combine the data set and remove duplicate from data set.Sorting is not importantin union all.
+		Ex-		cust1- cust2- cust3 (Input file)
+			       |
+				   Union All				  
+                OLEDB connection(Destination)
+		
+		j)Merge - It will merge more than 2 files.Merge required only two input at a time to merge more than 2 files use another sort task and merge task.(similar to union).Sorting is important in merge.
+		
+	Ex- 	  cust1- cust2- cust3 (Input file)
+		     |
+		  sort1- sort2- sort 3
+		     |     |     |
+			 Merge1---------Merge2
+			 |
+			 OLEDB connection (Destination)
+			 
+(output of cust1 and cust2)- Merge1
+
+        k)Merge Join - When data is comming from 2 sources and combine a record need to add new column.
+			 
+***Control Flow Task*** 			 
+1)Execute SQL - To clear the existing table ,then load the data.Write the query to delete table .
+  Ex-     Execute SQL Task
+              |
+		  Data Flow Task(inside this union all operation, etc)
+		
+2)File System Task - To remove the files from folder, move , or remove specefic character from file.
+		  
+3)Exceute process Task - To run a batch, call a exe file process execution.
+		  
+		  
+*Precedence constraint in control Flow -*
+1)File system Task
+2)Remove the data
+3)Data Flow Task- load cust data
+4)if sucess - Update customer Info, else Failure Execute Process Task
+5)Execute SQL Task
+6)Data Flow Task - load sales data
+
+***Sequence cointainer Task-****
+Grouping of two steps can be put in squesence cointainer. - grouped in a single task.
+
+**variables**- To make a experesion dimically we use variables.
+
+**Expresions**- They are conditions
+DATEPART("DD",GETDAT())>25 - Result - True
+
+**For each cointainer**- To repeat an activity again and again.
+
+**For Loop scointainer**- For Loop container evaluates an expression and repeats its workflow until the expression evaluates to False.
+
+**Event Handler-** An event handler is similar to a package.how to trigger a email when my package or tasks failin SSIS,how to execute a task before particular task begins in SSIS,how to execute a task after particular task ends in SSIS.
+
+**Execute Package Task-** how to call a package from another package in SSIS,what is parent and child packages in SSIS. Ex- V1-<V2-<V3 package will execute.(control flow of execution of package)
+
+**Types of Transformations-**
+
+1)Syncronous Transformation- No of records Input = Number of records output.
+  Incomming rows and passes them in the Data Flow one row at a time.
+		Ex- Flat file source-< Derieved column-<Data conversion-<OLDEB conversion
+
+2)ASyncronous Transformation- All Data need to be read before it release to Destination.
+        Ex- Flat File Source-<sort-<Aggregate-<OLDEB conversion
+
+**Performance Improvement in Packages Execution-**
+when we run task in Control Flow in parallel then we can have performance Improvment faster.
+
+**Integration Services (SSIS) Server and Catlog-**
+1)Its is instance of the SQL Server Database Engine that hosts the SSISDB database. The database stores the following objects: packages, projects, parameters, permissions, server properties, and operational history.
+
+2)we can deploy SSIS projects in SQL server managment studio by- Integration Service Catlog folder.
+
+**SQL server Agent Job-**
+
+To create a job and run at a particular time.
+Sqql Server Agent is installled in SSMS.
