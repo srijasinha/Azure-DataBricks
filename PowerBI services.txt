@@ -1,0 +1,24 @@
+**PowerBi services**- Managment or updates is taken care by Microsoft
+
+working - 1)create Reports
+2)Publish to PowerBi Services(on cloud)
+3)Distribute and consume across devices
+
+**PowerBi Report server**- seperate routes to share PowerBi Reports and Managment is taken care by own owner.
+
+working - 1)create Reports
+2)Publish to PowerBi Services(on permise(local system))
+3)Distribute and consume across devices
+
+Need- 1)on premise report server
+      2)Data should be stored on Local system because Goverment, Banking Industries want to keep Data secure.They protect the server based on their own security.
+
+**Note- PowerBi Report server is similar to SSRS(RDL extension) and PowerBi online Service. Because it can hold powerBi files (.pbx files) and (Rdl files).
+
+**PowerBI Report Server Liciencing-**
+
+1)PowerBi Premium
+2)SQL server Enteprise Edition with Software Insurance
+
+
+
