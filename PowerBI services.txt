@@ -21,4 +21,29 @@ Need- 1)on premise report server
 2)SQL server Enteprise Edition with Software Insurance
 
 
+**Scedule Refress Dataset or Reports in PowerBi-**
+
+1)Go in manage option
+2)Schedule Refress - New Schedule plan -  Then Apply
+
+**Security-**
+
+Security can applied on two level-
+
+1)Folder Level - Manage-<Security - Add user with diffrent Roles to view Report.
+
+**Row Level Security**- 
+We have a data set , we restrict the data based on user login.
+  Ex - A user of USA want to see the list of USA city only ,He cant see India city data.
+  
+NOTE:- Add group and members in Manage Roles.
+
+**Paginated Reports**- Data will be shown inn Pages and it is Printable Reports.
+
+1)It is called SSRS report and in PowerBi called Paginated Reports where we can build the reports by PowerBi builder.
+
+2)can deploy in on premise Report server
+3)Can't Embed in PowerBi Desktop Reports
+3)Same as SSRS reports and easy to migrate to cloud
+
 
